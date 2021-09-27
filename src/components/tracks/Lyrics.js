@@ -62,7 +62,7 @@ class Lyrics extends Component {
               {/*  this needs updating in tutorial  */}
               <strong>Genre</strong>:
               {track.primary_genres.music_genre_list.length !== 0
-                ? `${track.primary_genres.music_genre_list[0].music_genre.music_genre_name}`
+                ? ` ${track.primary_genres.music_genre_list[0].music_genre.music_genre_name}`
                 : " Not Available"}
             </li>
             <li className="list-group-item">
