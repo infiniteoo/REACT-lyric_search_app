@@ -10,6 +10,18 @@ class Search extends Component {
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  findTrack = (e) => {
+    e.preventDefault();
+    axios
+      .get(
+        `https://nameless-tundra-23437.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_track=${this.state.trackTitle}&page_size=10&page=1&s_track_rating=desc&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
   render() {
     return (
       <Consumer>
@@ -20,7 +32,7 @@ class Search extends Component {
                 <i className="fas fa-music"></i> Search For A Song
               </h1>
               <p className="lead text-center">Get the lyrics for any track</p>
-              <form>
+              <form onSubmit={this.findTrack}>
                 <div className="form-group">
                   <input
                     type="text"
