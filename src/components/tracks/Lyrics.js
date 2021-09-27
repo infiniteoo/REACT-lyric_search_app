@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Spinner from "../layout/Spinner";
 
 class Lyrics extends Component {
   state = {
@@ -22,16 +23,23 @@ class Lyrics extends Component {
         );
       })
       .then((res) => {
-        console.log(res.data.message.body);
+        this.setState({ track: res.data.message.body.track });
       })
       .catch((err) => console.log(err));
   }
   render() {
-    return (
-      <div>
-        <h1>Lyrics</h1>
-      </div>
-    );
+    const { track, lyrics } = this.state;
+
+    if (
+      track === undefined ||
+      lyrics === undefined ||
+      Object.keys(track).length === 0 ||
+      Object.keys(lyrics).length === 0
+    ) {
+      return <Spinner />;
+    } else {
+      return <h1>Data returned</h1>;
+    }
   }
 }
 

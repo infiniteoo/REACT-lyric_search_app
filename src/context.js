@@ -12,7 +12,7 @@ export class Provider extends Component {
   componentDidMount() {
     axios
       .get(
-        `https://nameless-tundra-23437.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=100&country=US&f_has_lyrics=1&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
+        `https://nameless-tundra-23437.herokuapp.com/https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=10&country=US&f_has_lyrics=1&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
       )
       .then((res) => {
         console.log(res.data);
