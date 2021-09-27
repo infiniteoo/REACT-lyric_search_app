@@ -10,18 +10,19 @@ class Lyrics extends Component {
   componentDidMount() {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
+        `https://nameless-tundra-23437.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?commontrack_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
       )
       .then((res) => {
-        /* console.log(res.data); */
+        console.log("lyrics call", res.data);
+        console.log(this.props.match.params.id);
         this.setState({ lyrics: res.data.message.body.lyrics });
 
         return axios.get(
-          `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?commontrack_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
+          `https://nameless-tundra-23437.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?commontrack_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
         );
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data.message.body);
       })
       .catch((err) => console.log(err));
   }
