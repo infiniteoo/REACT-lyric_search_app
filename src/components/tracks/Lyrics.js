@@ -11,19 +11,19 @@ class Lyrics extends Component {
 
   componentDidMount() {
     axios
+      /* this needs updating in tutorial */
       .get(
         `https://nameless-tundra-23437.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?commontrack_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
       )
       .then((res) => {
-        console.log("lyrics call", res.data);
-        console.log(this.props.match.params.id);
         this.setState({ lyrics: res.data.message.body.lyrics });
-
+        /* this needs updating in tutorial */
         return axios.get(
           `https://nameless-tundra-23437.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?commontrack_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
         );
       })
       .then((res) => {
+        console.log(res.data.message.body.track);
         this.setState({ track: res.data.message.body.track });
       })
       .catch((err) => console.log(err));
@@ -53,6 +53,18 @@ class Lyrics extends Component {
               <p className="card-text">{lyrics.lyrics_body}</p>
             </div>
           </div>
+          <ul className="list-group mt-3">
+            <li className="list-group-item">
+              <strong>Album ID</strong>: {track.album_id}
+            </li>
+            <li className="list-group-item">
+              {/*  this needs updating in tutorial  */}
+              <strong>Genre</strong>:
+              {track.primary_genres.music_genre_list.length !== 0
+                ? `${track.primary_genres.music_genre_list[0].music_genre.music_genre_name}`
+                : " Not Available"}
+            </li>
+          </ul>
         </>
       );
     }
