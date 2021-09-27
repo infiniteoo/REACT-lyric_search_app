@@ -13,8 +13,15 @@ class Lyrics extends Component {
         `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
       )
       .then((res) => {
+        /* console.log(res.data); */
+        this.setState({ lyrics: res.data.message.body.lyrics });
+
+        return axios.get(
+          `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?commontrack_id=${this.props.match.params.id}&apikey=${process.env.REACT_APP_MUSIXMATCH_API}`
+        );
+      })
+      .then((res) => {
         console.log(res.data);
-        /* this.setState({ track_list: res.data.message.body.track_list }); */
       })
       .catch((err) => console.log(err));
   }
