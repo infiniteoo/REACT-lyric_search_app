@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
+import Moment from "react-moment";
 
 class Lyrics extends Component {
   state = {
@@ -68,6 +69,11 @@ class Lyrics extends Component {
               {" "}
               <strong>Explicit Lyrics</strong>:
               {track.explicit === 0 ? " No" : " Yes"}
+            </li>
+            <li className="list-group-item">
+              {/* this needs updating - release date doesnt exist */}{" "}
+              <strong>Last Updated</strong>:{" "}
+              <Moment format="MM/DD/YYYY">{track.updated_time}</Moment>
             </li>
           </ul>
         </>
